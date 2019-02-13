@@ -1,0 +1,26 @@
+head
+    meta(charset="UTF-8")
+    title 
+        | Quick Dev Template - 
+        | #{"(gulp, browser-sync, scss, jade, bootstrap 3, jquery, mdi, angular, underscore, underscore.string)"}
+
+    //- disable resize on mobiles
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+    //- material design icons (by google)
+    if (qdt_c.platform.libs.mdi)
+        link(rel="stylesheet", href="assets/dist/mdi/css/materialdesignicons.min.css")
+
+    //- bootstrap 3
+    if (qdt_c.platform.libs.bootstrap_3)
+        link(rel="stylesheet", href="assets/dist/bootstrap/css/bootstrap.min.css")
+
+    //- angular csp (cloack)
+    if (qdt_c.platform.libs.angular)
+        link(rel="stylesheet", href="assets/dist/angular/angular-csp.css")
+
+    //- custom style
+    link(rel="stylesheet", href="assets/dist/slick-carousel/slick/slick.css")
+    link(rel="stylesheet", href="assets/dist/slick-carousel/slick/slick-theme.css")
+    link(rel="stylesheet", href="assets/css/style.min.css")
+    link(rel="stylesheet" type="text/css" href="assets/dist/nanoscroller/bin/css/nanoscroller.css")

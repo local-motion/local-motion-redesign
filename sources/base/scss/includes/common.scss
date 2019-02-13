@@ -1,0 +1,35 @@
+.pull-right { float: right; }
+.pull-left { float: left; }
+
+.text-right { text-align: right!important; }
+.text-center { text-align: center!important; }
+.text-left { text-align: left!important; }
+
+.text-strike { text-decoration: line-through; }
+.text-muted { color: #a1a1a1; }
+
+.font-bold{
+    font-family: $bf;
+    font-weight: 900;
+}
+.font-semibold{
+  font-family: $bf;
+  font-weight: 600;
+}
+.font-medium{
+  font-family: $bf;
+  font-weight: 500;
+}
+
+.hidden { display: none; }
+
+.cf { @include cf(); }
+
+.vertical-align-middle{
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.main_button { @include button(#eb621b, #ffffff, #ef8149); }
+

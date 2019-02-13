@@ -1,0 +1,131 @@
+@mixin light_shadow($color: transparent) {
+  box-shadow: 5px 10px 30px $color;
+}
+
+.block-push-notifications {
+  position: fixed;
+  right: 15px;
+  top: 100px;
+  width: 340px;
+  z-index: 5;
+
+  .notification {
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    margin: 0 0 20px;
+    padding: 20px 30px 20px 45px;
+    position: relative;
+    font-size: 14px;
+    font-family: $bf;
+    color: #262626;
+    width: 100%;
+    cursor: default;
+    background: #faf9f5;
+    transform: translate(120%, 0);
+    opacity: 0;
+    transition: .5s;
+    filter: blur(15px);
+
+    .close-notification {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      font-size: 24px;
+      color: transparent;
+      transition: .4s;
+      z-index: 1;
+      img{
+        width: 15px;
+        height: 15px;
+      }
+      &.mdi.mdi-close:before{
+        display: none;
+      }
+      &:hover {
+        color: #e62043;
+      }
+    }
+
+    .icon {
+      font-size: 24px;
+      float: left;
+      width: 25px;
+      height: 25px;
+      margin-left: -25px;
+      margin-top: 0px;
+      margin-right: 5px;
+      color: #33475b;
+      position: relative;
+      top: -7px;
+      &.mdi-customer_success{
+        background-color: #1d4b7c;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        -webkit-mask: url($img_path + '/svg/list.svg') no-repeat 50% 50%;
+        mask: url($img_path + '/svg/list.svg') no-repeat 50% 50%;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+        background-size: cover;
+        position: absolute;
+        left: 15px;
+        top: 23px;
+      }
+    }
+
+    .text {
+      font: inherit;
+    }
+
+    &.notification-danger {
+      background: #d20909;
+      color: #ffffff;
+      .close-notification{
+        img{
+          -webkit-filter: brightness(50);
+          filter: brightness(50);
+        }
+      }
+      .icon{
+        color: #ffffff;
+      }
+      &:after{
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-image: url($img_path + '/texture.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat;
+        right: 0;
+        bottom: 0;
+      }
+    }
+
+    &.notification-success {
+      background: #ffffff;
+      .close-notification{
+        img{
+          opacity: 0.5;
+        }
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+    }
+
+    &.shown {
+      transform: translate(0, 0);
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+  @media (max-width: 768px) {
+    right: 0;
+    width: 100%;
+  }
+}
