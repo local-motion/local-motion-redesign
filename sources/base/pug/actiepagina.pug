@@ -128,19 +128,22 @@ block content
 
 
                         #statistics
-                            .stat_block
-                                .item
-                                    .icon
-                                        include ../resources/assets/images/svg/doc.svg
-                                    .text 33
-                                .item
-                                    .icon
-                                        include ../resources/assets/images/svg/users.svg
-                                    .text 26
-                                .item
-                                    .icon
-                                        include ../resources/assets/images/svg/euro.svg
-                                    .text 200
+                            ul.nav.nav-tabs.stat_block
+                                li.item
+                                    a(href="#doc" data-toggle="tab" aria-expanded="true")
+                                        .icon
+                                            include ../resources/assets/images/svg/doc.svg
+                                        .text 33
+                                li.item
+                                    a(href="#users" data-toggle="tab" aria-expanded="false")
+                                        .icon
+                                            include ../resources/assets/images/svg/users.svg
+                                        .text 26
+                                li.active.item
+                                    a(href="#euro" data-toggle="tab" aria-expanded="false")
+                                        .icon
+                                            include ../resources/assets/images/svg/euro.svg
+                                        .text 203
 
                             .question_block
                                 a(href="#") ?
