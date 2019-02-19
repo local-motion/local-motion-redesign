@@ -1,0 +1,367 @@
+extends layout/layout
+
+mixin actiepagina_slide(image, title, name, rating)
+    .block
+        .image(style="background-image: url('" + image + "')")
+        .info
+            .title= title
+            .name= name
+            ul.step_block
+                li
+                    span.step
+                li
+                    span.step
+                li
+                    span.step
+                li.active
+                    span.step
+                li
+                    span.step
+                li
+                    span.step
+                li
+                    span.step
+
+        .user_rating
+            .user_icon
+                include ../resources/assets/images/svg/user_icon.svg
+            .rating.no_event
+                span.star.on(data-rating="1")
+                span.star.on(data-rating="2")
+                span.star.on(data-rating="3")
+                span.star.on(data-rating="4")
+                span.star.on(data-rating="5")
+                input.rating-value(type="hidden" name="seller_rating" value= rating )
+
+mixin panel-content(n)
+    .tab-pane(role="tabpanel")
+        .panel-content
+            .content.nano
+                .nano-content
+                    .image
+                    .title
+                    .step_content
+                    .tip
+                    .example
+                    .quote
+        .action_block
+            .prev_step
+                a(href="#")
+                    include ../resources/assets/images/svg/arrow.svg
+            .btn_block
+                a.main_button(href="#") ik heb deze stap volbracht!
+            .next_step
+                a(href="#")
+                    include ../resources/assets/images/svg/arrow.svg
+
+mixin nav-pill-li(n)
+    li(role="presentation")
+        a(data-toggle="tab" href="" role="tab" aria-controls="")
+            .number= n
+            .info
+                .pill_title
+                .pill_subtitle
+            .check
+                include ../resources/assets/images/svg/check-in.svg
+
+block content
+    #content.fase.fase-actiepagina
+        #fase
+            .container
+                .row
+                    .col-xs-12
+                        .h1 Actiepagina
+
+                .row
+                    .col-xs-12
+                        .steps_list
+                            +actiepagina_slide('assets/images/image.png','Amersfoort',
+                            'Anderen, Aa en Hunze', '2.56')
+
+
+                .row
+                    .col-xs-12
+
+                        #donate
+                            .tab-content
+                                .tab-pane.active#steps_content_block
+                                    #nav-tab
+                                        ul.nav.nav-tabs
+                                            li.active
+                                                a(href="#nav-voorbereiden" data-toggle="tab" aria-expanded="true")
+                                                    .number 1
+                                                    .tab_title
+                                                    .check
+                                                        include ../resources/assets/images/svg/check-in.svg
+                                            li.disabled
+                                                a(href="#nav-invoeren" data-toggle="tab" aria-expanded="false")
+                                                    .number 2
+                                                    .tab_title
+                                                    .check
+                                                        include ../resources/assets/images/svg/check-in.svg
+
+                                            li.disabled
+                                                a(href="#nav-naleven-en-evalueren" data-toggle="tab" aria-expanded="false")
+                                                    .number 3
+                                                    .tab_title
+                                                    .check
+                                                        include ../resources/assets/images/svg/check-in.svg
+
+                                        .tab-content#nav-tab-content
+                                            .tab-pane.active#nav-voorbereiden
+
+                                                ul.nav.nav-pills(role="tablist")
+
+                                                .tab-content
+
+                                            .tab-pane#nav-invoeren
+                                                ul.nav.nav-pills(role="tablist")
+
+
+                                                .tab-content
+
+
+
+                                            .tab-pane#nav-naleven-en-evalueren
+                                                ul.nav.nav-pills(role="tablist")
+
+
+                                                .tab-content
+
+
+
+
+
+                                .tab-pane#doc
+                                    .header
+                                        table
+                                            tr
+                                                td
+                                                    .tab_icon
+                                                        .check 33
+                                                        include ../resources/assets/images/svg/doc.svg
+
+                                                td
+                                                    .desc
+                                                        p Willen graag dat Speeltuin Amersfoort rookvrij wordt.
+                                                        p Nodig meer mensen uit om te tekenen.
+
+
+
+                                    .content
+                                        table
+                                            tr
+                                                td
+                                                    .share.share_soc
+                                                        .title Deel op sociale media
+                                                        .btn-block
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="fasebook")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.facebook
+                                                                        img(src="assets/images/Facebook.png")
+                                                                        span Facebook
+
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="twitter")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.twitter
+                                                                        img(src="assets/images/Twitter.png")
+                                                                        span Twitter
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="google")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.google
+                                                                        img(src="assets/images/Google.png")
+                                                                        span Google
+                                                td
+                                                    .share.share_link
+                                                        .title Kopieer link
+                                                        .input_block
+                                                            .input-group
+                                                               span.input-group-addon
+                                                                   include ../resources/assets/images/svg/link_icon.svg
+                                                               input.form-control(type="text" value="" onkeyup="this.setAttribute('value', this.value);")
+                                                        button.main_button Kople
+
+                                            tr
+                                                td(colspan="2")
+                                                    .share.share_email
+                                                        .title Verzend e-mailuitnodiging
+                                                        .input_block
+                                                            .input-group
+                                                                input.form-control(type="text" value="" onkeyup="this.setAttribute('value', this.value);")
+                                                        button.main_button Sturen
+
+
+                                    .footer
+                                        button.main_button Share now!
+                                .tab-pane#users
+                                    table
+                                        tr
+                                            td
+                                                .header
+
+                                                    .tab_icon
+                                                        .check 26
+                                                        include ../resources/assets/images/svg/users.svg
+
+                                                    .desc
+                                                        p Mensen hebben zich aangemeld voor deze actiepagina. Stel je gerust even voor!
+
+
+
+                                            td
+                                                .content
+                                                    .chat
+                                                        .chat_header
+                                                            table
+                                                                tr
+                                                                    td
+                                                                        .title Chat
+                                                                    td
+                                                                        .input_block
+                                                                            .input-group
+                                                                                input.form-control(placeholder="" value="")
+                                                                                .input-group-addon
+                                                                                    button.btn.btn-default
+                                                                                        include ../resources/assets/images/svg/Magnify.svg
+                                                        .chat-content
+                                                            .content
+                                                                .nano-content
+                                                                    .messages
+                                                                        .message_content
+                                                                            .message
+                                                                                .message_avatar
+                                                                                    .image(style="background-image: url('assets/images/avatar/Avatar.png')")
+                                                                                .message_info
+                                                                                    div
+                                                                                        .message_name LMbot
+                                                                                        .message_time 2:45 pm
+                                                                                    .message_text Welcome, Albert
+                                                                        .message_content
+                                                                            .message
+                                                                                .message_avatar
+                                                                                    .image(style="background-image: url('assets/images/avatar/Avatar3.png')")
+                                                                                .message_info
+                                                                                    div
+                                                                                        .message_name Albert Einstein
+                                                                                        .message_time 5:45 pm
+                                                                                    .message_text The flyers just arrived, can you help me distribute them?
+
+                                                                        .message_count
+                                                                            span
+                                                                                span 2 message
+                                                                        .message_content
+                                                                            .message
+                                                                                .message_avatar
+                                                                                    .image(style="background-image: url('assets/images/avatar/Avatar.png')")
+                                                                                .message_info
+                                                                                    div
+                                                                                        .message_name LMbot
+                                                                                        .message_time 2:45 pm
+                                                                                    .message_text Welcome, Karianne
+                                                                        .message_content
+                                                                            .message
+                                                                                .message_avatar
+                                                                                    img(src="assets/images/avatar/Avatar.png")
+                                                                                .message_info.joined
+                                                                                    div
+                                                                                        .message_name 12:05
+                                                                                        .message_time 12:05
+                                                                                    .message_text
+                                                                                        .message_joined
+                                                                                            img(src="assets/images/avatar/Avatar2.png")
+                                                                                            .message_name Pharrell Williams
+                                                                                            .message_text joined to team
+
+
+                                                                        .message_content
+                                                                            .message
+                                                                                .message_avatar
+                                                                                    .image(style="background-image: url('assets/images/avatar/Avatar3.png')")
+                                                                                .message_info
+                                                                                    div
+                                                                                        .message_name Albert Einstein
+                                                                                        .message_time 5:45 pm
+                                                                                    .typing
+                                                                                        include ../resources/assets/images/svg/pencil.svg
+                                                                                        span.typing_text Typing
+                                                                                        span.dot
+                                                                                        span.dot
+                                                                                        span.dot
+
+
+
+                                                        .send_message
+                                                            form
+                                                                textarea.text_container(placeholder="Your message here")
+                                                                button.send(type="submit")
+                                                                    img(src="assets/images/send_button.png")
+                                .tab-pane#euro
+                                    .header
+                                        .tab_icon
+                                            include ../resources/assets/images/svg/euro.svg
+                                        .desc 203,-
+                                    .content
+                                        table
+                                            tr
+                                                td
+                                                    .title   Is gedoneerd aan dit project
+                                                    a.main_button.ideal(href="https://www.ideal.nl/en/")
+                                                        span.icon
+                                                            include ../resources/assets/images/svg/ideal.svg
+                                                        span Doneer met iDeal
+                                                td
+                                                    .title Er is nog geen beheerder*
+                                                    a.be_admin.main_button(href="#")
+                                                        span Geef je op
+                                            tr.admin
+                                                td(colspan="2")
+                                                    .tab_icon
+                                                        include ../resources/assets/images/svg/user_icon.svg
+                                                    .desc
+                                                        p
+                                                            span Jannniexx32 &nbsp;
+                                                            | is de beheerder.
+                                                            br
+                                                            | Ze is van plan de donaties uit te geven aan nieuwe tegels
+
+                                    .footer
+                                        p *Als zich geen beheerder aanmeld, zal de donatie naar ANR gaan.
+
+
+
+                        #statistics
+                            ul.nav.nav-tabs.stat_block
+                                li.item
+                                    a(href="#doc" data-toggle="tab" aria-expanded="true")
+                                        .icon
+                                            include ../resources/assets/images/svg/doc.svg
+                                        .text 33
+                                li.item
+                                    a(href="#users" data-toggle="tab" aria-expanded="false")
+                                        .icon
+                                            include ../resources/assets/images/svg/users.svg
+                                        .text 26
+                                li.item
+                                    a(href="#euro" data-toggle="tab" aria-expanded="false")
+                                        .icon
+                                            include ../resources/assets/images/svg/euro.svg
+                                        .text 203
+
+                            .question_block
+                                a(href="#") ?
+                        template#template-nav-pill-li
+                            +nav-pill-li(0)
+                        template#template-panel-content
+                            +panel-content(0)
