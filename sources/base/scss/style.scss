@@ -438,51 +438,48 @@ html {
             }
           }
         }
-        #steps_content_block{
+        #steps_content {
           box-shadow: $box-shadow;
           border-radius: 7px;
           border: 1px solid $cb;
           overflow: hidden;
-          & + #statistics {
-            margin-top: 20px;
-          }
-          #nav-tab{
-            & > ul{
-              padding: 20px;
-              border-bottom: 1px solid $cb;
+          .steps_content_pane {
+            width: 100%;
+            &.active {
               display: table;
-              width: 100%;
-              & > li{
-                display: table-cell;
-                width: 33.3333%;
-                padding: 0 10px;
-                &:first-child{
-                  padding-left: 0;
-                }
-                &:last-child{
-                  padding-right: 0;
-                }
-                a{
-                  border-radius: 10px;
-                  border: 1px solid $cb;
+            }
+            .tab-list {
+              display: table-cell;
+              width: 31%;
+              border-right: 1px solid $cb;
+              vertical-align: top;
+              & > .item {
+                display: block;
+                width: 100%;
+                padding: 0;
+                min-width: 325px;
+                a {
+                  border-radius: 0;
                   position: relative;
                   padding: 15px;
                   text-align: center;
-                  &:focus{
+                  width: 100%;
+                  display: block;
+                  &:focus {
                     outline: none;
                   }
-                  &:before{
+                  &:before {
                     opacity: 0;
                     content: '';
                     width: 15px;
                     height: 15px;
                     border-bottom-left-radius: 3px;
-                    behavior:url(-ms-transform.htc);
-                    -moz-transform:rotate(-45deg);
-                    -webkit-transform:rotate(-45deg);
-                    -o-transform:rotate(-45deg);
-                    -ms-transform:rotate(-45deg);
-                    transform:rotate(-45deg);
+                    behavior: url(-ms-transform.htc);
+                    -moz-transform: rotate(-45deg);
+                    -webkit-transform: rotate(-45deg);
+                    -o-transform: rotate(-45deg);
+                    -ms-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
                     background: transparent;
                     -webkit-transition-delay: 0s;
                     -moz-transition-delay: 0s;
@@ -497,16 +494,16 @@ html {
                     bottom: -7px;
                     left: calc(50% - 10px);
                   }
-                  .number{
+                  .number {
                     font-weight: bold;
                     color: $sbc;
                     font-size: 30px;
                   }
-                  .tab_title{
+                  .tab_title {
                     color: $tc;
                     font-size: 14px;
                   }
-                  .check{
+                  .check {
                     width: 20px;
                     height: 20px;
                     text-align: center;
@@ -517,47 +514,59 @@ html {
                     border-radius: 50%;
                     background: $sbc;
                     display: none;
-                    svg{
+                    svg {
                       width: 12px;
                       height: 9px;
                       position: absolute;
                       top: 6px;
                       left: 4px;
-                      path{
+                      path {
                         fill: #fff;
                       }
                     }
                   }
                 }
-
-                &.disabled{
+                &.disabled {
                   position: relative;
-                  a{
+                  a {
                     background: #f5f5f5;
                     border-color: transparent;
                     cursor: pointer;
+                    border-bottom: 1px solid $cb;
+                  }
+                  & + .nav-pills{
+                    padding: 0;
+                    height: 0;
+                    display: none;
                   }
                 }
-                &.done{
-                  a{
+                &.done {
+                  a {
                     background: #fff;
-                    .check{
+                    border-bottom: 1px solid $cb;
+                    .check {
                       display: inline-block;
                     }
                   }
+
+                  & + .nav-pills{
+                    padding: 0;
+                    height: 0;
+                    display: none;
+                  }
                 }
-                &.active{
-                  a{
+                &.active {
+                  a {
                     box-shadow: $box-shadow;
                     background: $bc;
                     .number,
-                    .tab_title{
+                    .tab_title {
                       color: #fff;
                     }
-                    .check{
+                    .check {
                       background-color: $bc;
                     }
-                    &:before{
+                    &:before {
                       background: $bc;
                       opacity: 1;
                       -webkit-transition-delay: 1.5s;
@@ -570,245 +579,240 @@ html {
                       -o-transition: 1s ease;
                     }
                   }
+                  & + .nav-pills{
+                    height: auto;
+                    padding: 20px;
+                    display: block;
+                    border-bottom: 1px solid $cb;
+                  }
                 }
               }
-              & + .tab-content{
-                border-top: 0;
-                .tab-pane{
+              & > .nav-pills {
+                padding: 0;
+                height: 0;
+                display: none;
+                li {
+                  margin-bottom: 10px;
                   width: 100%;
-                  &.active{
+                  margin-left: 0;
+                  min-height: 50px;
+                  a {
+                    width: 100%;
+                    background-color: #fff;
                     display: table;
+                    position: relative;
+                    border-radius: 5px;
+                    padding: 0;
+                    border: 1px solid $cb;
+                    min-height: 50px;
+                    .info {
+                      padding: 10px;
+                      font-size: 13px;
+                      display: table-cell;
+                      height: 100%;
+                      vertical-align: middle;
+                      .pill_title {
+                        font-weight: 600;
+                        color: $tc;
+                      }
+                      .pill_subtitle {
+                        color: $bc;
+                        line-height: 1.3;
+                      }
+                    }
+                    .number {
+                      display: table-cell;
+                      width: 50px;
+                      height: 50px;
+                      text-align: center;
+                      vertical-align: middle;
+                      font-weight: bold;
+                      border-right: 1px solid $cb;
+                      color: $sbc;
+                      padding-bottom: 5px;
+                      font-size: 18px;
+                      padding-top: 10px;
+                    }
+                    .check {
+                      display: none;
+                      position: absolute;
+                      top: 15px;
+                      right: 10px;
+                      width: 20px;
+                      height: 20px;
+                      background-color: $sbc;
+                      border-radius: 50%;
+                      text-align: center;
+                      svg {
+                        width: 12px;
+                        height: 9px;
+                        position: absolute;
+                        top: 6px;
+                        left: 4px;
+                        path {
+                          fill: #fff
+                        }
+                      }
+                    }
                   }
-                  .nav-pills {
-                    display: table-cell;
-                    width: 31%;
-                    padding: 20px;
-                    border-right: 1px solid $cb;
-                    vertical-align: top;
-                    li{
-                      margin-bottom: 10px;
+                  &.disabled {
+                    position: relative;
+                    a {
+                      border-color: transparent;
+                      background: #f5f5f5;
+                      .number {
+                        border-right: 1px solid #fff;
+                      }
+                    }
+                    &:after {
+                      content: '';
                       width: 100%;
-                      margin-left: 0;
-                      min-height: 50px;
-                      a{
-                        width: 100%;
-                        background-color: #fff;
-                        display: table;
-                        position: relative;
-                        border-radius: 5px;
-                        padding: 0;
-                        border: 1px solid $cb;
-                        min-height: 50px;
-                        .info{
-                          padding: 10px;
-                          font-size: 13px;
-                          display: table-cell;
-                          height: 100%;
-                          vertical-align: middle;
-                          .pill_title{
-                            font-weight: 600;
-                            color: $tc;
-                          }
-                          .pill_subtitle{
-                            color: $bc;
-                            line-height: 1.3;
-                          }
-                        }
-                        .number{
-                          display: table-cell;
-                          width: 50px;
-                          height: 50px;
-                          text-align: center;
-                          vertical-align: middle;
-                          font-weight: bold;
-                          border-right: 1px solid $cb;
-                          color: $sbc;
-                          padding-bottom: 5px;
-                          font-size: 18px;
-                          padding-top: 10px;
-                        }
-                        .check{
-                          display: none;
-                          position: absolute;
-                          top: 15px;
-                          right: 10px;
-                          width: 20px;
-                          height: 20px;
-                          background-color: $sbc;
-                          border-radius: 50%;
-                          text-align: center;
-                          svg{
-                            width: 12px;
-                            height: 9px;
-                            position: absolute;
-                            top: 6px;
-                            left: 4px;
-                            path{
-                              fill:#fff
-                            }
-                          }
-                        }
-                      }
-                      &.disabled{
-                        position: relative;
-                        a{
-                          border-color: transparent;
-                          background: #f5f5f5;
-                          .number{
-                            border-right: 1px solid #fff;
-                          }
-                        }
-                        &:after{
-                          content: '';
-                          width: 100%;
-                          height: 100%;
-                          position: absolute;
-                          left: 0;
-                          top: 0;
-                          cursor: not-allowed;
-                        }
-                      }
+                      height: 100%;
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      cursor: not-allowed;
+                    }
+                  }
 
-                      &.done{
-                        a{
-                          border: 1px solid #a6cffa;
-                          background: #fff;
-                          .number{
-                            border-right: 1px solid #a6cffa;
-                          }
-                          .info{
-                            padding-right: 30px;
-                          }
-                          .check{
-                            display: inline-block;
-                          }
+                  &.done {
+                    a {
+                      border: 1px solid #a6cffa;
+                      background: #fff;
+                      .number {
+                        border-right: 1px solid #a6cffa;
+                      }
+                      .info {
+                        padding-right: 30px;
+                      }
+                      .check {
+                        display: inline-block;
+                      }
+                    }
+                  }
+                  &.viewed {
+                    a {
+                      border: 1px solid #a6cffa;
+                      background: #fff;
+                      .number {
+                        border-right: 1px solid #a6cffa;
+                      }
+                      .info {
+                        padding-right: 30px;
+                      }
+                      .check {
+                        display: none;
+                      }
+                    }
+                  }
+                  &.active {
+                    a {
+                      border: 1px solid transparent;
+                      background: $bc;
+                      box-shadow: $box-shadow;
+                      .number {
+                        border-right: 1px solid rgba(166, 207, 250, 0.2);
+                        color: #fff;
+                      }
+                      .check {
+                        background-color: $bc;
+                      }
+                      .info {
+                        .pill_title {
+                          color: #fff;
+                        }
+                        .pill_subtitle {
+                          color: #fff;
                         }
                       }
-                      &.viewed{
-                        a{
-                          border: 1px solid #a6cffa;
-                          background: #fff;
-                          .number{
-                            border-right: 1px solid #a6cffa;
-                          }
-                          .info{
-                            padding-right: 30px;
-                          }
-                          .check{
-                            display: none;
+                    }
+                  }
+                }
+              }
+              & + .tab-content {
+                display: table-cell;
+                .tab-pane {
+                  .panel-content {
+                    padding: 10px 20px;
+                    position: relative;
+                    &:after {
+                      content: '';
+                      position: absolute;
+                      width: 100%;
+                      height: 10px;
+                      box-shadow: 0px -5px 10px 0px rgba(98, 98, 98, 0.1) inset;
+                      bottom: 0;
+                      left: 0;
+                    }
+                    .content {
+                      height: 435px;
+                      overflow: hidden;
+                      img {
+                        height: 200px;
+                        width: auto;
+                        max-width: 100%;
+                        margin-bottom: 15px;
+                        border-radius: 5px;
+                      }
+                      .title {
+                        font-family: $sbf;
+                        font-size: 28px;
+                        color: $red;
+                        margin-bottom: 10px;
+                      }
+                    }
+                  }
+                  .action_block {
+                    display: table;
+                    width: 100%;
+                    border-top: 1px solid $cb;
+                    .prev_step,
+                    .next_step,
+                    .btn_block {
+                      display: table-cell;
+                      vertical-align: middle;
+                      text-align: center;
+                    }
+                    .prev_step,
+                    .next_step {
+                      padding: 20px;
+                      width: 45px;
+                      a {
+                        width: 45px;
+                        height: 45px;
+                        display: inline-block;
+                        padding: 12px 0;
+                        border-radius: 3px;
+                        background-color: #fff;
+                        border: 1px solid $cb;
+                        text-align: center;
+                        svg {
+                          width: 9px;
+                          height: 20px;
+                          path {
+                            fill: $bc
                           }
                         }
-                      }
-                      &.active{
-                        a{
-                          border: 1px solid transparent;
+                        &:hover {
+                          border-color: transparent;
                           background: $bc;
-                          box-shadow: $box-shadow;
-                          .number{
-                            border-right: 1px solid rgba(166, 207, 250, 0.2);
-                            color: #fff;
-                          }
-                          .check{
-                            background-color: $bc;
-                          }
-                          .info{
-                            .pill_title{
-                              color: #fff;
-                            }
-                            .pill_subtitle{
-                              color: #fff;
+                          svg {
+                            path {
+                              fill: #fff;
                             }
                           }
                         }
                       }
                     }
-                    & + .tab-content{
-                      display: table-cell;
-                      .tab-pane{
-                        .panel-content{
-                          padding: 10px 20px;
-                          position: relative;
-                          &:after{
-                            content: '';
-                            position: absolute;
-                            width: 100%;
-                            height: 10px;
-                            box-shadow: 0px -5px 10px 0px rgba(98, 98, 98, 0.1) inset;
-                            bottom: 0;
-                            left: 0;
-                          }
-                          .content{
-                            height: 435px;
-                            overflow: hidden;
-                            img{
-                              height: 200px;
-                              width: auto;
-                              max-width: 100%;
-                              margin-bottom: 15px;
-                              border-radius: 5px;
-                            }
-                            .title{
-                              font-family: $sbf;
-                              font-size: 28px;
-                              color: $red;
-                              margin-bottom: 10px;
-                            }
-                          }
-                        }
-                        .action_block{
-                          display: table;
-                          width: 100%;
-                          border-top: 1px solid $cb;
-                          .prev_step,
-                          .next_step,
-                          .btn_block{
-                            display: table-cell;
-                            vertical-align: middle;
-                            text-align: center;
-                          }
-                          .prev_step,
-                          .next_step{
-                            padding: 20px;
-                            width: 45px;
-                            a{
-                              width: 45px;
-                              height: 45px;
-                              display: inline-block;
-                              padding: 12px 0;
-                              border-radius: 3px;
-                              background-color: #fff;
-                              border: 1px solid $cb;
-                              text-align: center;
-                              svg{
-                                width: 9px;
-                                height: 20px;
-                                path{
-                                  fill: $bc
-                                }
-                              }
-                              &:hover{
-                                border-color: transparent;
-                                background: $bc;
-                                svg{
-                                  path{
-                                    fill: #fff;
-                                  }
-                                }
-                              }
-                            }
-                          }
-                          .next_step{
-                            a{
-                              svg{
-                                behavior:url(-ms-transform.htc);
-                                -moz-transform:rotate(180deg);
-                                -webkit-transform:rotate(180deg);
-                                -o-transform:rotate(180deg);
-                                -ms-transform:rotate(180deg);
-                                transform:rotate(180deg);
-                              }
-                            }
-                          }
+                    .next_step {
+                      a {
+                        svg {
+                          behavior: url(-ms-transform.htc);
+                          -moz-transform: rotate(180deg);
+                          -webkit-transform: rotate(180deg);
+                          -o-transform: rotate(180deg);
+                          -ms-transform: rotate(180deg);
+                          transform: rotate(180deg);
                         }
                       }
                     }
@@ -816,6 +820,10 @@ html {
                 }
               }
             }
+          }
+
+          & + #statistics {
+            margin-top: 20px;
           }
         }
         #statistics{
@@ -1082,6 +1090,19 @@ html {
               & + .form-control{
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
+              }
+            }
+          }
+        }
+        &#steps_content{
+          border: 0!important;
+          box-shadow: none!important;
+          .tab-content{
+            .tab-pane{
+              .panel-content{
+                .content{
+                  height: 565px!important;
+                }
               }
             }
           }

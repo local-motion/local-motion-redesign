@@ -68,11 +68,12 @@ $.getJSON(url, function (data) {
 
     $.each(jsonData, function (i, el) {
 
-        if($('#steps_content_block #nav-tab').length > 0){
+        if($('#steps_content').length > 0){
 
-            var content = $('#steps_content_block #nav-tab');
-            var tab = content.find('.nav-tabs li').eq(i);
-            var tab_content = $($(tab).find('a').attr('href'));
+            var content = $('#steps_content');
+            var tab = content.find('.steps_content_pane .tab-list .item').eq(i);
+            var tab_list = $('.steps_content_pane .tab-list .nav-pills').eq(i);
+            var tab_content = $('.steps_content_pane .tab-content');
             var templateNavPill = $('#template-nav-pill-li').html();
             var templatePanelContent = $('#template-panel-content').html();
 
@@ -83,7 +84,10 @@ $.getJSON(url, function (data) {
                 var newContent = $(templatePanelContent);
                 var new_id = 'step' + i + j;
 
-                if(j == 0){
+                $(tab).attr('data-tab', i );
+                $(tab_list).attr('data-tab', i)
+
+                if(i == 0 && j == 0){
                     newPill.addClass('active');
                     newContent.addClass('active');
                 }
@@ -94,9 +98,9 @@ $.getJSON(url, function (data) {
                 newPill.find('.number').text(j + 1);
                 newPill.find('.info .pill_title').text(step.tab_title);
                 newPill.find('.info .pill_subtitle').text(step.tab_subtitle);
-                tab_content.find('.nav-pills').append(newPill);
+                tab_list.append(newPill);
 
-                newContent.attr('id', new_id);
+                newContent.attr('id', new_id).attr('data-tab', i);
                 if(step.image_url != ''){
                     newContent.find('.image').append($('<img />').attr('src', step.image_url))
                 }
@@ -106,7 +110,7 @@ $.getJSON(url, function (data) {
                 newContent.find('.example').html(step.example);
                 newContent.find('.quote').html(step.quote);
 
-                tab_content.find('.tab-content').append(newContent);
+                tab_content.append(newContent);
 
             });
         }
@@ -118,66 +122,163 @@ $.getJSON(url, function (data) {
 
 });
 
-$('.panel-content .content').nanoScroller();
+
+
 
 $(document).ready(function() {
 
-    $('.action_block .btn_block a').on('click', function (e) {
+    $(document).on('click','.action_block .btn_block a', function (e) {
 
         e.preventDefault();
 
-        var tab = $(this).closest('.tab-pane');
-        var next_tab = $(this).closest('.tab-pane').next('.tab-pane');
+        var tab_list = $(this).closest('.steps_content_pane').find('.tab-list');
+        var tab = $(tab_list).find('.item.active').next('.nav-pills').find('li.active');
+        var next_tab = $(tab_list).find('.item.active').next('.nav-pills').find('li.active').next('li');
+        var n = $(tab).closest('.nav-pills').data('tab');
 
-        $(this).attr('disabled','disabled').prop('disabled','disabled');
+        if(!$(tab_list).find('.item.active').hasClass('disabled')) {
+            if (next_tab.length > 0) {
+                $(this).attr('disabled', 'disabled').prop('disabled', 'disabled');
 
-        $('a[href="#' + next_tab.attr('id') + '"]').closest('li').addClass('viewed').removeClass('disabled');
-        $('a[href="#' + next_tab.attr('id') + '"]').tab('show');
+                $(next_tab).addClass('viewed').removeClass('disabled');
+                $(next_tab).find('a').tab('show');
+                $('.tab-pane.active').find('.panel-content .content').nanoScroller();
 
-        $('a[href="#' + tab.attr('id') + '"]').closest('li').removeClass('viewed').removeClass('disabled').addClass('done');
+                $(tab).removeClass('viewed').removeClass('active').removeClass('disabled').addClass('done');
 
-        if(next_tab.length <= 0  ) {
-            $(this).closest('#steps_content_block #nav-tab').find('.nav-tabs li.active').addClass('done').next('li').removeClass('disabled').find('a').tab('show');
-        }
+            }
+            else if (next_tab.length <= 0 && n < ($(tab_list).find('.item').length - 1)) {
 
-    });
+                $(this).attr('disabled', 'disabled').prop('disabled', 'disabled');
 
-    $('.action_block .next_step a').on('click', function (e) {
+                $(tab).removeClass('viewed').removeClass('active').removeClass('disabled').addClass('done');
 
-        e.preventDefault();
+                $(tab_list).find('.item').each(function (i, el) {
+                    if ($(el).data('tab') == (n + 1)) {
 
-        var next_tab = $(this).closest('.tab-pane').next('.tab-pane');
+                        $(tab_list).find('.nav-pills').each(function (n, pill) {
+                            $(pill).find('li').each(function (j, li) {
+                                $(li).removeClass('active');
+                            });
+                        });
 
-        if(next_tab.length > 0 && $(this).closest('.action_block').find('.btn_block a').attr('disabled') == "disabled" ) {
+                        $(tab_list).find('.item.active').addClass('done').removeClass('active').removeClass('disabled').removeClass('viewed');
 
-            if (!$('a[href="#' + next_tab.attr('id') + '"]').closest('li').hasClass('disabled')) {
-                $('a[href="#' + next_tab.attr('id') + '"]').tab('show');
+                        $(el).addClass('active').removeClass('disabled').next('.nav-pills').find('li:first-child a').tab('show');
+
+                        $('.tab-pane.active').find('.panel-content .content').nanoScroller();
+                    }
+                });
+            }
+            else if (next_tab.length <= 0 && n == ($(tab_list).find('.item').length - 1)) {
+                $(this).attr('disabled', 'disabled').prop('disabled', 'disabled');
+                $(tab).removeClass('viewed').removeClass('disabled').addClass('done');
             }
         }
-        else if(next_tab.length <= 0  && $(this).closest('.action_block').find('.btn_block a').attr('disabled') == "disabled"){
-
-            $(this).closest('#steps_content_block #nav-tab').find('.nav-tabs li.active').addClass('done').next('li').removeClass('disabled').find('a').tab('show');
-        }
-
     });
 
-    $('.action_block .prev_step a').on('click', function (e) {
+    $(document).on('click', '.action_block .next_step a', function (e) {
+
         e.preventDefault();
 
-        var prev_tab = $(this).closest('.tab-pane').prev('.tab-pane');
+        var tab_list = $(this).closest('.steps_content_pane').find('.tab-list');
+        var tab = $(tab_list).find('.item.active').next('.nav-pills').find('li.active');
+        var next_tab = $(tab_list).find('.item.active').next('.nav-pills').find('li.active').next('li');
+        var n = $(tab).closest('.nav-pills').data('tab');
 
-        if(prev_tab.length > 0) {
-
-            $('a[href="#' + prev_tab.attr('id') + '"]').tab('show');
+        if (next_tab.length > 0 && $(this).closest('.action_block').find('.btn_block a').attr('disabled') == "disabled") {
+            console.log(n);
+            if (!$(next_tab).hasClass('disabled')) {
+                $(next_tab).find('a').tab('show');
+                $('.tab-pane.active').find('.panel-content .content').nanoScroller();
+            }
         }
-        else if(prev_tab.length <= 0 ){
+        else if (next_tab.length <= 0 && $(this).closest('.action_block').find('.btn_block a').attr('disabled') == "disabled") {
 
-            console.log($(prev_tab));
 
-            $(this).closest('#steps_content_block #nav-tab').find('.nav-tabs li.active').prev('li').find('a').tab('show');
+            $(tab_list).find('.item.active').addClass('done').removeClass('active').removeClass('disabled').removeClass('viewed');
+
+
+            $(tab_list).find('.nav-pills').each(function (i, el) {
+                $(el).find('li').each(function (j, li) {
+                    $(li).removeClass('active');
+                });
+            });
+            $(tab_list).find('.item').each(function (i, el) {
+                if ($(el).data('tab') == (n + 1)) {
+                    $(el).addClass('active').removeClass('disabled').next('.nav-pills').find('li:first-child a').tab('show');
+
+                    $('.tab-pane.active').find('.panel-content .content').nanoScroller();
+                }
+            });
         }
 
     });
+
+    $(document).on('click', '.action_block .prev_step a', function (e) {
+        e.preventDefault();
+
+        var tab_list = $(this).closest('.steps_content_pane').find('.tab-list');
+        var tab = $(tab_list).find('.item.active').next('.nav-pills').find('li.active');
+        var prev_tab = $(tab_list).find('.item.active').next('.nav-pills').find('li.active').prev('li');
+        var n = $(tab).closest('.nav-pills').data('tab');
+
+        if (prev_tab.length > 0 ) {
+            $(prev_tab).find('a').tab('show');
+            $('.tab-pane.active').find('.panel-content .content').nanoScroller();
+        }
+        else if (prev_tab.length <= 0 && n > 0) {
+
+            $(tab_list).find('.item.active').addClass('done').removeClass('active').removeClass('disabled').removeClass('viewed');
+
+            $(tab_list).find('.nav-pills').each(function (i, el) {
+                $(el).find('li').each(function (j, li) {
+                    $(li).removeClass('active');
+                });
+            });
+
+            $(tab_list).find('.item').each(function (i, el) {
+                if ($(el).data('tab') == (n - 1)) {
+                    $(el).addClass('active').removeClass('disabled').next('.nav-pills').find('li:last-child a').tab('show');
+                    $('.tab-pane.active').find('.panel-content .content').nanoScroller();
+                }
+            });
+        }
+        else if (prev_tab.length <= 0 && n == 0) {
+
+        }
+
+    });
+
+    $('.steps_content_pane .item a').on('click', function (e) {
+        e.preventDefault();
+
+        var tab_list = $(this).closest('.tab-list');
+        var n = $(this).closest('.item').data('tab');
+
+        $(tab_list).find('.item').each(function (i, el) {
+            $(el).removeClass('active');
+        });
+
+
+        $(tab_list).find('.nav-pills').each(function (i, el) {
+            $(el).find('li').each(function (j, li) {
+                $(li).removeClass('active');
+            });
+        });
+
+
+        $(tab_list).find('.item').each(function (i, el) {
+            if ($(el).data('tab') == (n)) {
+                $(el).addClass('active').next('.nav-pills').find('li:last-child a').tab('show');
+                $('.tab-pane.active').find('.panel-content .content').nanoScroller();
+            }
+        });
+
+        $(this).closest('.item').addClass('active').next('.nav-pills').find('li:first-child a').tab('show');
+
+    });
+
 
     $('#icons_block .fase_block').on('click', function (e) {
        e.preventDefault();
@@ -189,16 +290,6 @@ $(document).ready(function() {
        $(this).toggleClass('check-in');
     });
 
-    /*$('#icons_block .main_button.join').on('click', function (e) {
-        e.preventDefault();
-       var fase_check = $(this).closest('#icons_block').find('.fase_block.check-in');
-
-       if(fase_check.length > 0 && fase_check.find('.icon.icon-voorbereiden').length > 0){
-           var link = $(fase_check).find('.icon.icon-voorbereiden').data('href');
-
-           window.location.href = location.protocol + "//" + location.host + link;
-       }
-    });*/
 
     $('.be_admin').on('click', function (e) {
        e.preventDefault();

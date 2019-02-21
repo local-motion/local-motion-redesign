@@ -81,51 +81,40 @@ block content
 
                 .row
                     .col-xs-12
-                        #steps_content_block
-                            #nav-tab
-                                ul.nav.nav-tabs
-                                    li.active
+                        #steps_content
+                            .steps_content_pane
+
+                                .tab-list
+
+                                    .item.active
                                         a(href="#nav-voorbereiden" data-toggle="tab" aria-expanded="true")
                                             .number 1
                                             .tab_title
                                             .check
                                                 include ../resources/assets/images/svg/check-in.svg
-                                    li.disabled
+
+                                    ul.nav.nav-pills(role="tablist")
+
+
+                                    .item.disabled
                                         a(href="#nav-invoeren" data-toggle="tab" aria-expanded="false")
                                             .number 2
                                             .tab_title
                                             .check
                                                 include ../resources/assets/images/svg/check-in.svg
 
-                                    li.disabled
+                                    ul.nav.nav-pills(role="tablist")
+
+                                    .item.disabled
                                         a(href="#nav-naleven-en-evalueren" data-toggle="tab" aria-expanded="false")
                                             .number 3
                                             .tab_title
                                             .check
                                                 include ../resources/assets/images/svg/check-in.svg
 
-                                .tab-content#nav-tab-content
-                                    .tab-pane.active#nav-voorbereiden
+                                    ul.nav.nav-pills(role="tablist")
 
-                                        ul.nav.nav-pills(role="tablist")
-
-                                        .tab-content
-
-                                    .tab-pane#nav-invoeren
-                                        ul.nav.nav-pills(role="tablist")
-
-
-                                        .tab-content
-
-
-
-                                    .tab-pane#nav-naleven-en-evalueren
-                                        ul.nav.nav-pills(role="tablist")
-
-
-                                        .tab-content
-
-
+                                .tab-content
 
                         #statistics
                             ul.nav.nav-tabs.stat_block
@@ -139,7 +128,7 @@ block content
                                         .icon
                                             include ../resources/assets/images/svg/users.svg
                                         .text 26
-                                li.active.item
+                                li.item
                                     a(href="#euro" data-toggle="tab" aria-expanded="false")
                                         .icon
                                             include ../resources/assets/images/svg/euro.svg
