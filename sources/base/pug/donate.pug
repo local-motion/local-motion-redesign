@@ -44,6 +44,7 @@ mixin panel-content(n)
                     .tip
                     .example
                     .quote
+
         .action_block
             .prev_step
                 a(href="#")
@@ -70,25 +71,16 @@ block content
             .container
                 .row
                     .col-xs-12
+                        a.to_start.pull-right(href="#steps_content" data-toggle="tab" aria-expanded="true") Actiepagina
+
                         .h1 Actiepagina
-
                 .row
                     .col-xs-12
-                        .steps_list
-                            +actiepagina_slide('assets/images/image.png','Amersfoort',
-                            'Anderen, Aa en Hunze', '2.56')
-
-
-                .row
-                    .col-xs-12
-
                         #donate
                             .tab-content
                                 .tab-pane.active#steps_content
                                     .steps_content_pane
-
                                         .tab-list
-
                                             .item.active
                                                 a(href="#nav-voorbereiden" data-toggle="tab" aria-expanded="true")
                                                     .number 1
@@ -353,3 +345,63 @@ block content
                             +nav-pill-li(0)
                         template#template-panel-content
                             +panel-content(0)
+                        template#template-share-link
+                            #share-link
+                                table
+                                    tr
+                                        td
+                                            p Deel de link om mensen uit te nodigen voor deze actiepagina:
+                                            .share.share_link
+                                                .input_block
+                                                    .input-group
+                                                        span.input-group-addon
+                                                            include ../resources/assets/images/svg/link_icon.svg
+                                                        input.form-control(type="text" value="https://bit.ly/2wiPmeI" onkeyup="this.setAttribute('value', this.value);")
+                                                .share_btns_block
+                                                    button.main_button
+                                                        include ../resources/assets/images/svg/share_btn.svg
+                                                    .share.share_soc
+                                                        .btn-block
+                                                            span.arrow
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="fasebook")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.facebook
+                                                                        img(src="assets/images/Facebook.png")
+
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="twitter")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.twitter
+                                                                        img(src="assets/images/Twitter.png")
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="google")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.google
+                                                                        img(src="assets/images/Google.png")
+                                                            .checkbox
+                                                                label
+                                                                    input(type="checkbox" name="share" value="mail")
+                                                                    span.cr
+                                                                        span.cr-icon
+                                                                            include ../resources/assets/images/svg/check-in.svg
+                                                                    span.mail
+                                                                        img(src="assets/images/Mail.png")
+                                        td
+                                            .share.share_stat
+                                                .form-group
+                                                    input.form-control(placeholder="" value="14" id="shared" disabled="disabled")
+                                                    label(for="shared") Shares
+                                                .form-group
+                                                    input.form-control(placeholder="" value="208" id="visited" disabled="disabled")
+                                                    label(for="visited") Bezoekers
+

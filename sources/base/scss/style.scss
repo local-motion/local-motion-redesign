@@ -333,8 +333,18 @@ html {
         }
       }
       #fase{
+        .to_start{
+          position: relative;
+          top: -40px;
+          right: 55px;
+          font-weight: 500;
+          font-family: $sbf;
+          color: $tc;
+          z-index: 10;
+          display: none;
+        }
         .h1{
-          font-size: 40px;
+          font-size: 50px;
           font-family: $sbf;
           margin: 30px auto 20px;
           text-align: center;
@@ -501,7 +511,7 @@ html {
                   }
                   .tab_title {
                     color: $tc;
-                    font-size: 14px;
+                    font-size: 16px;
                   }
                   .check {
                     width: 20px;
@@ -747,18 +757,157 @@ html {
                     .content {
                       height: 435px;
                       overflow: hidden;
-                      img {
-                        height: 200px;
-                        width: auto;
-                        max-width: 100%;
-                        margin-bottom: 15px;
-                        border-radius: 5px;
+                      .image{
+                        img {
+                          height: 200px;
+                          width: auto;
+                          max-width: 100%;
+                          margin-bottom: 15px;
+                          border-radius: 5px;
+                        }
                       }
                       .title {
                         font-family: $sbf;
-                        font-size: 28px;
+                        font-size: 36px;
                         color: $red;
                         margin-bottom: 10px;
+                      }
+                      .step_content,.step_content *{
+                        font: normal 20px/1.5 $bf;
+                        ul{
+                          margin-bottom: 16px;
+                          li{
+                            padding-left: 15px;
+                            position: relative;
+                            &:before{
+                              content: '';
+                              position: absolute;
+                              width: 5px;
+                              height: 5px;
+                              border-radius: 50%;
+                              background: $tc;
+                              top: 14px;
+                              left: 4px;
+                            }
+
+                          }
+                        }
+                      }
+                      .tip, .tip *,
+                      .quote, .quote *{
+                        font: normal 20px/1.5 $bf;
+                      }
+                      #share-link{
+                        width: 100%;
+                        position: relative;
+                        top: 20px;
+                        table{
+                          width: 100%;
+                          tr{
+                            border-top: 1px solid $cb;
+                            td{
+                              padding: 20px;
+                              border-right: 1px solid $cb;
+                              vertical-align: middle;
+                              &:first-child{
+                                padding-left: 0;
+                                width: 55%;
+                              }
+                              &:last-child{
+                                padding-left: 0;
+                                padding-right: 0;
+                                border-right: 0;
+                              }
+                            }
+                          }
+                        }
+                        .share{
+                          &.share_link{
+                            .input_block{
+                              width: calc(100% - 63px);
+                              max-width: 280px;
+                            }
+                            .share_btns_block {
+                              position: relative;
+                              display: inline-block;
+                              button {
+                                padding: 7px;
+                                svg {
+                                  width: 20px;
+                                  height: 20px;
+                                  position: relative;
+                                  top:2px;
+                                  left: 0!important;
+                                  path {
+                                    fill: #fff;
+                                  }
+                                }
+                              }
+                              .share.share_soc {
+                                display: none;
+                                position: absolute;
+                                bottom: 99%;
+                                padding-bottom: 8px;
+                                left: calc(-0.5 * (59px * 4 + 20px) + 27px);
+                                .btn-block{
+                                  background: #fff;
+                                  width: calc(59px * 4 + 20px);
+                                  border-radius: 5px;
+                                  position: relative;
+                                  &:before{
+                                    content: '';
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                    z-index: -1;
+                                    border-radius: 5px;
+                                    box-shadow: 0px 0px 25px 10px rgba(40,40,40,0.15);
+                                  }
+                                  span.arrow {
+                                    position: absolute;
+                                    width: 24px;
+                                    height: 24px;
+                                    border: 0;
+                                    box-shadow: 0px 0px 25px 10px rgba(40,40,40,0.07);
+                                    border-style: solid;
+                                    transform: rotate(45deg);
+                                    background: #fff;
+                                    top: calc(100% - 15px);
+                                    z-index: -1;
+                                    left: calc(50% - 16px);
+                                    transition: all .3s ease;
+                                    -webkit-transition: all .3s ease;
+                                    -moz-transition: all .3s ease;
+                                    -o-transition: all .3s ease;
+                                  }
+                                  .checkbox {
+                                    width: auto;
+                                    margin: 15px 15px 15px 0;
+                                    display: inline-block;
+                                    &:first-of-type{
+                                      margin-left: 15px;
+                                    }
+                                    label {
+                                      width: auto;
+                                      input+.cr+span{
+                                        width: 42px;
+                                        height: 42px;
+                                        padding: 5px;
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                              &:hover{
+                                .share.share_soc{
+                                  display: block;
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -815,6 +964,11 @@ html {
                           transform: rotate(180deg);
                         }
                       }
+                    }
+                  }
+                  &#step00{
+                    .step_content{
+                      min-height: 280px;
                     }
                   }
                 }
@@ -935,6 +1089,168 @@ html {
               font-weight: bold;
             }
           }
+        }
+      }
+    }
+  }
+  .share{
+    &.share_soc {
+      .btn-block {
+        .checkbox {
+          width: calc(33.33333% - 19px);
+          margin: 15px 15px 15px 0;
+          position: relative;
+          padding: 0;
+          display: inline-block;
+          label {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            input {
+              display: none;
+              & + .cr {
+                display: none;
+                width: 20px;
+                height: 20px;
+                background: $sbc;
+                border-radius: 50%;
+                text-align: center;
+                padding: 1px 0;
+                position: absolute;
+                bottom: calc(100% - 10px);
+                left: calc(100% - 10px);
+                .cr-icon {
+                  line-height: 0;
+                  display: inline-block;
+                  svg {
+                    width: 11px;
+                    height: 10px;
+                    path {
+                      fill: #fff;
+                    }
+                  }
+                }
+                & + span {
+                  padding: 5px 10px;
+                  border-radius: 5px;
+                  display: inline-block;
+                  width: 100%;
+                  span {
+                    display: inline-block;
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 13px;
+                    vertical-align: middle;
+                    padding-left: 10px;
+                  }
+                  img {
+                    width: 32px;
+                    height: 32px;
+                    display: inline-block;
+                    vertical-align: middle;
+                  }
+                  &.facebook {
+                    background: #3b5998;
+                  }
+                  &.twitter {
+                    background: #58adee;
+                  }
+                  &.google {
+                    background: #dd4b39;
+                  }
+                  &.mail {
+                    background: #085ca6;
+                  }
+                }
+              }
+              &:checked + .cr {
+                display: block;
+              }
+            }
+            &:hover {
+              input {
+                & + .cr {
+                  & + span {
+                    box-shadow: $box-shadow;
+                    &.mail{
+                      //background: #258ecc;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.share_link{
+      .input_block{
+        display: inline-block;
+        vertical-align: top;
+        margin: 15px 10px 15px 0;
+        max-width: 320px;
+        width: calc(100% - 120px);
+        .input-group{
+          .input-group-addon{
+          }
+          input{
+            height: 42px;
+          }
+        }
+      }
+      .main_button{
+        max-width: 100px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 15px 10px 15px 0;
+        padding: 9px;
+      }
+    }
+    &.share_email{
+      .input_block{
+        display: inline-block;
+        vertical-align: top;
+        margin: 15px 10px 15px 0;
+        max-width: 480px;
+        width: calc(100% - 160px);
+        .input-group{
+          width: 100%;
+          input{
+            height: 44px;
+          }
+        }
+      }
+      .main_button{
+        max-width: 140px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 15px 10px 15px 0;
+        padding: 10px;
+      }
+    }
+    &.share_stat{
+      .form-group{
+        margin: 0;
+        display: inline-block;
+        width: 49%;
+        .form-control,
+        .form-control:not([value=""]):not(:focus) {
+          width: 80px;
+          padding: 39px 10px;
+          margin: auto;
+          color: $bc;
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          border-radius: 50%;
+          border: 1px solid #258ecc;
+          background: #ffffff;
+        }
+        label{
+          text-align: center;
+          width: 100%;
+          font-weight: 500;
+          margin: 10px auto;
         }
       }
     }
@@ -1060,7 +1376,7 @@ html {
           .input-group{
             width: 100%;
             .form-control{
-              border-color: #a1a1a1!important;
+              border-color: #a1a1a1;
               border-radius: 3px;
               font-weight: 600;
               box-shadow: none;
@@ -1079,7 +1395,7 @@ html {
             }
             .input-group-addon{
               background: transparent;
-              border-color: #a1a1a1!important;
+              border-color: #a1a1a1;
               svg{
                 width: 16px;
                 height: 16px;
@@ -1151,136 +1467,6 @@ html {
                   vertical-align: top;
                   &:not(:last-child){
                     border-right: 1px solid #e7e7e7;
-                  }
-                  .share{
-                    &.share_soc {
-                      .btn-block {
-                        .checkbox {
-                          width: calc(33.33333% - 19px);
-                          margin: 15px 15px 15px 0;
-                          position: relative;
-                          padding: 0;
-                          display: inline-block;
-                          label {
-                            padding: 0;
-                            margin: 0;
-                            width: 100%;
-                            input {
-                              display: none;
-                              & + .cr {
-                                display: none;
-                                width: 20px;
-                                height: 20px;
-                                background: $sbc;
-                                border-radius: 50%;
-                                text-align: center;
-                                padding: 1px 0;
-                                position: absolute;
-                                bottom: calc(100% - 10px);
-                                left: calc(100% - 10px);
-                                .cr-icon {
-                                  line-height: 0;
-                                  display: inline-block;
-                                  svg {
-                                    width: 11px;
-                                    height: 10px;
-                                    path {
-                                      fill: #fff;
-                                    }
-                                  }
-                                }
-                                & + span {
-                                  padding: 5px 10px;
-                                  border-radius: 5px;
-                                  display: inline-block;
-                                  width: 100%;
-                                  span {
-                                    display: inline-block;
-                                    color: #fff;
-                                    font-weight: bold;
-                                    font-size: 13px;
-                                    vertical-align: middle;
-                                    padding-left: 10px;
-                                  }
-                                  img {
-                                    width: 32px;
-                                    height: 32px;
-                                    display: inline-block;
-                                    vertical-align: middle;
-                                  }
-                                  &.facebook {
-                                    background: #3b5998;
-                                  }
-                                  &.twitter {
-                                    background: #58adee;
-                                  }
-                                  &.google {
-                                    background: #dd4b39;
-                                  }
-                                }
-                              }
-                              &:checked + .cr {
-                                display: block;
-                              }
-                            }
-                            &:hover {
-                              input {
-                                & + .cr {
-                                  & + span {
-                                    box-shadow: $box-shadow;
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                    &.share_link{
-                      .input_block{
-                        display: inline-block;
-                        vertical-align: top;
-                        margin: 15px 10px 15px 0;
-                        max-width: 320px;
-                        width: calc(100% - 120px);
-                        .input-group{
-                          .input-group-addon{
-                          }
-                          input{
-                            height: 42px;
-                          }
-                        }
-                      }
-                      .main_button{
-                        max-width: 100px;
-                        display: inline-block;
-                        vertical-align: top;
-                        margin: 15px 10px 15px 0;
-                        padding: 9px;
-                      }
-                    }
-                    &.share_email{
-                      .input_block{
-                        display: inline-block;
-                        vertical-align: top;
-                        margin: 15px 10px 15px 0;
-                        max-width: 480px;
-                        width: calc(100% - 160px);
-                        .input-group{
-                          width: 100%;
-                          input{
-                            height: 44px;
-                          }
-                        }
-                      }
-                      .main_button{
-                        max-width: 140px;
-                        display: inline-block;
-                        vertical-align: top;
-                        margin: 15px 10px 15px 0;
-                        padding: 10px;
-                      }
-                    }
                   }
                 }
                 &:first-child{
