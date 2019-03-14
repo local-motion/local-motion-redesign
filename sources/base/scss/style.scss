@@ -319,12 +319,12 @@ html {
               }
             }
           }
-          &:hover{
-            cursor: pointer;
-            .icon{
-              box-shadow: $box-shadow-hover;
-            }
-          }
+//           &:hover{
+//             cursor: pointer;
+//             .icon{
+//               box-shadow: $box-shadow-hover;
+//             }
+//           }
         }
         .join{
           min-width: 350px;
